@@ -1,1 +1,26 @@
 
+function find(obj, criteriaFn){
+  let current = obj,
+    next = [];
+
+  while (current){
+    if (criteriaFn(current)){
+      return current
+    }
+
+    if (Array.isArray(current)){
+      for (let i = 0, l = current.length; i < l; i++){
+        next.push(current[i])
+      }
+    }
+    if (current.constructor === Object){
+      for (let i = 0, l = Object.keys(current).length; i < l; i++){
+        next.push(current[Object.keys(current)[i]])
+      }
+    }
+
+    current = next.shift()
+  }
+
+  return null
+}
